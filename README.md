@@ -56,17 +56,7 @@ pip install -r requirements.txt
     - Initiates the port scanning process.
     - Uses multithreading if specified; otherwise, scans ports sequentially.
     - Calls the `report` method to display results after scanning.
-
-## Example
-
-```python
-if __name__ == "__main__":
-    raptor = Raptor(host, port_start, port_end, threads)
-    raptor.validate_target()
-    input("Press any button when ready")
-    print("Engaging target....")
-    raptor.scan()
-```
+      
 
 ## Legal Disclaimer
 
