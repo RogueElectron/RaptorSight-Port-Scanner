@@ -9,12 +9,12 @@
 - `socket`: For network connections and port scanning.
 - `concurrent.futures.ThreadPoolExecutor`: For handling multithreading.
 - `os`: For error code recognition.
-- `tqdm`: For displaying progress bars during the scanning process.
+- `tqdm`: For displaying a progress indicator (progress bar) during the scanning process.
 
 To install the required dependencies, run:
 
 ```
-pip install -r requirements.txt
+pip install tqdm
 ```
 
 ## Usage
