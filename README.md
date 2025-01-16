@@ -2,11 +2,11 @@
 
 ## Overview
 
-`RaptorSight.py` is a project for educational purposes and is not intended to be used as a real tool. It is a port scanner tool named RaptorSight, designed to scan a specified range of ports on a given IP address or hostname. It utilizes multithreading for faster scanning and provides detailed reports of open ports and any errors encountered during the scan.
+`RaptorSight.py` is a project for educational purposes and is not intended to be used as a real tool. It is a port scanner tool named RaptorSight, designed to scan a specified range of ports on a given IP address or hostname.
 
 ## Dependencies
 
-- `tqdm`: For displaying a progress indicator (progress bar) during the scanning process.
+- `tqdm`: For displaying progress bars during the scanning process.
 
 To install the required dependencies, run:
 
@@ -18,8 +18,8 @@ pip install tqdm
 
 1. Run the script in a Python environment.
 2. Input the target IP address or hostname when prompted.
-3. Specify the starting and ending ports for the scan (default values are 1 and 1666).
-4. Optionally, specify the number of threads to use for scanning (default is no threading).
+3. Specify the starting and ending ports for the scan
+4. specify the number of threads to use for scanning (optional).
 5. The script will validate the inputs and begin scanning the specified ports.
 
 ## Functions
@@ -31,7 +31,7 @@ pip install tqdm
 
 - **`Raptor` Class**
 
-  - **`__init__(self, host, port_start, port_end, threads)`**
+  - **`__init__(self)`**
 
     - Initializes the Raptor object with the target host, port range, and threading option.
 
@@ -53,7 +53,17 @@ pip install tqdm
     - Initiates the port scanning process.
     - Uses multithreading if specified; otherwise, scans ports sequentially.
     - Calls the `report` method to display results after scanning.
-      
+
+## Example
+
+```python
+if __name__ == "__main__":
+    raptor = Raptor(host, port_start, port_end, threads)
+    raptor.validate_target()
+    input("Press any button when ready")
+    print("Engaging target....")
+    raptor.scan()
+```
 
 ## Legal Disclaimer
 
