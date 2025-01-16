@@ -6,9 +6,6 @@
 
 ## Dependencies
 
-- `socket`: For network connections and port scanning.
-- `concurrent.futures.ThreadPoolExecutor`: For handling multithreading.
-- `os`: For error code recognition.
 - `tqdm`: For displaying a progress indicator (progress bar) during the scanning process.
 
 To install the required dependencies, run:
