@@ -1,12 +1,11 @@
 import socket
-from concurrent.futures import ThreadPoolExecutor #WAYYY simpler than the 'threading' module, handles 
-                                                  # distrubtion logic, if you don't like it, come code this urself
-import os #for error code recognition, epic, right?
-from tqdm import tqdm #one hell of a tool for progress bars, AND CHECK OUT HOW EASY IT IS TO USE
+from concurrent.futures import ThreadPoolExecutor 
+import os 
+from tqdm import tqdm 
 
 
 # RaptorSight port scanner by RogueElectron
-# version 0.0.1
+# version 0.1
 
 print("""
       
@@ -26,35 +25,31 @@ def validate_int_input(user_input, default_value):
     try:
         return int(user_input or default_value)
     except ValueError:
-        print("User seems to be illiterate, using default value")
+        print("Invalid input, using default value")
         return default_value
 
-host = input("Enter the IP address or hostname to scan: ")
-port_start = validate_int_input(input("port start (default: 1): "), 1)
-port_end = validate_int_input(input("port end (default: 1666): "), 1666)
-threads = validate_int_input(input("how much threads? (default: no threading): "), False)
-
 class Raptor:
-    def __init__(self, host, port_start, port_end, threads):
-        self.host = host
-        self.port_start = port_start
-        self.port_end = port_end
-        self.threads = threads
+    def __init__(self):
+        self.host = input("Enter the IP address or hostname to scan: ")
+        self.port_start = validate_int_input(input("port start (default: 1): "), 1)
+        self.port_end = validate_int_input(input("port end (default: 1666): "), 1666)
+        self.threads = validate_int_input(input("how much threads? (default: no threading): "), False)
         self.open_ports = []
         self.errors = []
         
+    
     def validate_target(self):
         ####----port validation----####
         if self.port_start > self.port_end:
-            print("port start is greater than port end, please use brain, using default values")
+            print("port start is greater than port end, using default values")
             self.port_start = 1
             self.port_end = 1666
         if self.port_end <= 0 or self.port_start <= 0:
-            print("port can't be negative, PLEASE, USE BRAIN, using default values")
+            print("port can't be negative, using default values")
             self.port_start = 1
             self.port_end = 1666
         if self.port_end > 65535 or self.port_start > 65535:
-            print("port can't be greater than 65535, Brain is required to use this tool, using default values")
+            print("port can't be greater than 65535, using default values")
             self.port_start = 1
             self.port_end = 1666
         ####----hostname validation----####
@@ -109,10 +104,24 @@ open ports:
                 executor.map(self.scan_port, tqdm(range(self.port_start, self.port_end + 1)))
 
         self.report()
+    
+    def menu(self):
+        while True:
+            print("1: Start Scan")
+            print("2: Exit")
+            match input("Enter Option: "):
+                case "1":
+                    self.validate_target()
+                    input("Press any button when ready")
+                    print("Engaging target....")
+                    self.scan()
+                case "2": 
+                    exit()
+                case _:
+                    print("Invalid input.")
+
+        
         
 if __name__ == "__main__":
-    raptor = Raptor(host, port_start, port_end, threads) 
-    raptor.validate_target()
-    input("Press any button when ready")
-    print("Engaging target....")
-    raptor.scan()
+    raptor = Raptor() 
+    raptor.menu()
